@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加银行卡</title>
+    <link rel="stylesheet" href="__ICSS__/mui.min.css">
+    <link rel="stylesheet" href="__ICSS__/iconfont.css">
+    <link rel="stylesheet" href="__ICSS__/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/layer/mobile/need/layer.css">
+    <link rel="stylesheet" href="__ICSS__/bindBank.css">
+    <script src="__IJS__/mui.min.js"></script>
+    <script src="__IJS__/jquery.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+<div class="container container1">
+    {if condition = "isset($user.banknumber) && !empty($user.banknumber)"}
+    <div class="bank_list">
+        <div class="bank_item">
+            <p class="bank_type">储蓄卡</p>
+            <p class="bank_cardnum">****   ****   ****   {$user.banknumber|substr=-4}</p>
+        </div>
+    </div>
+    {else/}
+    <img class="top_img" src="__IIMG__/bank_top.png">
+    {/if}
+
+    <div class="main">
+        <div class="bind_box">
+            <p class="change_ti">添加银行卡</p>
+            <input type="text" placeholder="请输入银行卡号" name="banknumber" value="{$user.banknumber}">
+            <input type="text" placeholder="请输入持卡人姓名" name="bname" value="{$user.bname}">
+            <input type="text" placeholder="请输入联系人手机号" name="phone" value="{$user.phone}">
+            <div class="clearfix"></div>
+            <p class="bind_tips">*请确认信息无误</p>
+            <button class="submit_btn">确定完成</button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(".submit_btn").on('click',function () {
+        var banknumber = $('input[name="banknumber"]').val();
+        var bname = $('input[name="bname"]').val();
+        var phone = $('input[name="phone"]').val();
+
+        var patterns = /^[\u4E00-\u9FA5]{1,6}$/;
+
+        var pattern = /^1[3456789]\d{9}$/;
+
+        /*if (banknumber == '') {
+            layer.msg('银行卡账号不能为空');
+            return false;
+        }
+
+        if (bname == '') {
+            layer.msg('收款人姓名不能为空');
+            return false;
+        }
+
+        if (phone == '') {
+            layer.msg('联系人手机号码不能为空');
+            return false;
+        }
+
+        if(!patterns.test(bname)){
+            layer.msg('请填写正确姓名');
+            return false;
+        }
+
+        if(!pattern.test(phone)) {
+            layer.msg('请填写正确的联系人手机号');
+            return false;
+        }*/
+        var ufs = layer.load();
+        $.ajax({
+            url: "{:url('index/user/edit')}",
+            type: "post",
+            dataType: 'json',
+            data: {'banknumber': banknumber, 'bname': bname, 'phone': phone, 'type': 2},
+            success: function (json) {
+                layer.close(ufs);
+                if(json.code == 0){
+                    layer.msg(json.message,{time:500},function(){
+                        window.location.href = "{:url('index/withdrawal/index')}";
+                    });
+                }else{
+                    layer.msg(json.message);
+                }
+            }
+        });
+
+    });
+
+</script>
+</html>

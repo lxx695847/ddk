@@ -1,0 +1,76 @@
+@charset "UTF-8";
+body{font-family: PingFang-SC-Regular;background: #fff;}
+.container{
+    min-width: 320px;
+    max-width: 750px;
+    margin: 0 auto;
+    position: relative;
+}
+.add_box{
+    padding: 0.2rem;
+}
+.add_item{
+    margin-bottom: 0.3rem;
+}
+.add_item span{
+    display: block;
+    width: 1.8rem;
+    text-align: right;
+    font-size: 0.28rem;
+    color: #333333;
+    line-height: 0.46rem;
+    float: left;
+    margin-right: 0.2rem;
+}
+.add_item input{
+    width: 4.26rem;
+    height: 0.46rem;
+    border: solid 0.02rem #888888;
+    padding: 0 0 0 0.1rem;
+    outline: none;
+    font-size: 0.26rem;
+    color: #333;
+    display: block;
+    float: left;
+    margin: 0 0.2rem 0 0;
+
+}
+.add_item input.plat_logo{
+    width: 2.76rem;
+}
+.add_item .choose_pic{
+    width: 1.29rem;
+    height: 0.46rem;
+    background-color: #5c8eff;
+    border-radius: 0.06rem;
+    border: none;
+    outline: none;
+    font-size: 0.24rem;
+    color: #ffffff;
+    float: left;
+}
+.add_item textarea{
+    width: 4.26rem;
+    height: 1.29rem;
+    border: solid 0.02rem #888888;
+    resize: none;
+    outline: none;
+    display: block;
+    float: left;
+    font-size: 0.26rem;
+    color: #333;
+    padding: 0.04rem 0.1rem;
+}
+.sure_btn{
+    width: 5.62rem;
+    height: 0.9rem;
+    background-image: linear-gradient(90deg, #6ca9d8 12%, #7f52bd 100%), linear-gradient(#ff7171, #ff7171);
+    background-blend-mode: normal, normal;
+    border-radius: 0.45rem;
+    border: none;
+    outline: none;
+    display: block;
+    margin: 0.6rem auto 0.2rem;
+    font-size: 0.36rem;
+    color: #fff;
+}

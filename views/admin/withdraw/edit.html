@@ -1,0 +1,89 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('backend/Withdraw/index')}">提现管理</a></li>
+            <li class=""><a href="{:url('backend/Withdraw/add')}">添加提现</a></li>
+            <li class="layui-this">编辑提现</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" id="myForm" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">提现名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" value="{$res.name}" required lay-verify="required" placeholder="请输入提现名" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">提现账户</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="bankcard" value="{$res.bankcard}" placeholder="请输入提现账户" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">提现手机号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="mobile" value="{$res.mobile}" lay-verify="number" placeholder="手机号" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">提现类型</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="type" value="1" title="支付宝" {if condition="$res.type eq 1"} checked="checked" {/if}>
+                            <input type="radio" name="type" value="2" title="银行卡" {if condition="$res.type eq 2"} checked="checked" {/if}>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="id" value="{$res.id}">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">提现金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="money" value="{$res.money}" lay-verify="number" placeholder="金额" class="layui-input">
+                        </div>
+                    </div>
+                </form>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" id="edit">更新</button>
+                        <button onclick="reset()" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/public/bootstrap/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+    //编辑
+    $("#edit").on('click',function () {
+        var load=layer.load(1);
+        var url="{:url('backend/Withdraw/get_edit')}";
+        var send=$("#myForm").serialize();
+        $.post(url,send,function (row) {
+            layer.close(load);
+            if(row.status=="success"){
+                layer.msg(row.msg,{icon:1},function () {
+                    location.replace("{:url('backend/Withdraw/index')}");
+                })
+            }else{
+                layer.msg(row.msg,{icon:2},function () {
+                    reset();
+                })
+            }
+        })
+    });
+
+    //重置
+    function reset() {
+        $("#myForm")[0].reset();
+    }
+</script>
+{/block}

@@ -1,0 +1,139 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">奖励管理</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form layui-form-pane" id="myform" method="get">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">关键词</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="keyword" name="keyword" value="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开始时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input start_time" name="start" id="start" value="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">结束时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input end_time" name="end" id="end" value="">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="layui-inline">
+                    <button onclick="getSearch()" class="layui-btn">搜索</button>
+                </div>
+                <div class="layui-inline">
+                    <button onclick="excel()" class="layui-btn">导出EXCEL</button>
+                </div>
+                <div class="layui-inline">
+                    <button onclick="reset()" class="layui-btn">重置</button>
+                </div>
+
+                <hr>
+                {if condition="$list.res neq false"}
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 30px;">ID</th>
+                        <th>客户名</th>
+                        <th>查询价格</th>
+                        <th>成本价格</th>
+                        <th>代理提成</th>
+                        <th>提成者</th>
+                        <th>提成类型</th>
+                        <th>提成余额</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $list.res as $vo}
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.names}</td>
+                        <td>{$vo.ratio}</td>
+                        <td>{$vo.cost_price}</td>
+                        <td>{$vo.money}</td>
+                        <td>{$vo.cnames}</td>
+                        <td>{$vo.type}</td>
+                        <td>{$vo.balance}</td>
+                        <td>{$vo.create_time|date="Y-m-d",###}</td>
+                        <td>{if condition="$vo.pid neq 0"}不可退
+                            {else/}<a data-sign="{$vo.sign}" class="back" style="background: red;color: white;padding: 5px">退款</a>
+                            {/if}
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+                <!--分页-->
+                {$list.page}
+                {else/}
+                    <p style="text-align: center;line-height: 80px;font-size: 18px;">暂无记录</p>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $(function(){
+        $(".back").on('click',function () {
+            var load=layer.load(1);
+            var send="{:url('backend/Income/back_money')}";
+            var sign=$(this).data('sign');
+            $.post(send,{'sign':sign},function (row) {
+                layer.close(load);
+                if(row.status=="success"){
+                    layer.msg(row.msg,{icon:1},function () {
+                        location.reload();
+                    })
+                }else{
+                    layer.msg(row.msg,{icon:2},function () {
+                        location.reload();
+                    })
+                }
+            })
+        })
+    });
+
+    function excel(){
+        var keyword=$("#keyword").val();
+        var start=$("#start").val();
+        var end=$("#end").val();
+        layer.msg("导出数据中...",function () {
+            location.replace("{:url('backend/Income/excel')}?keyword="+keyword+"&start="+start+"&end="+end);
+        });
+    }
+
+    function getSearch() {
+        layer.msg("搜索中....");
+        var keyword=$("#keyword").val();
+        var start=$("#start").val();
+        var end=$("#end").val();
+        if(keyword==false && start==false && end==false){
+            layer.closeAll();
+            layer.msg("请至少选择一个搜索条件");
+        }else{
+            layer.closeAll();
+            location.replace("{:url('backend/Income/index')}?keyword="+keyword+"&start="+start+"&end="+end);
+        }
+    }
+
+    function reset() {
+        $("#myform")[0].reset();
+        location.replace("{:url('backend/Income/index')}")
+    }
+</script>
+{/block}

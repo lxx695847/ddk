@@ -1,0 +1,184 @@
+@charset "UTF-8";
+body{font-family: PingFang-SC-Regular;background: #F1F1F1;}
+.container{
+    min-width: 320px;
+    max-width: 750px;
+    margin: 0 auto;
+    position: relative;
+}
+.reward_box{
+    padding: 0.2rem;
+}
+.reward_all{
+    height: 0.94rem;
+    background-color: #ffffff;
+    border-radius: 0.18rem;
+    line-height: 0.94rem;
+    font-size: 0.28rem;
+    color: #333;
+    padding: 0 0.2rem;
+}
+.reward_all a{
+    display: block;
+    float: right;
+    line-height: 0.94rem;
+    font-size: 0.28rem;
+    color: #194aff;
+}
+.reward_all a img{
+    width: 0.3rem;
+    vertical-align: -0.06rem;
+}
+.reward_ti{
+    padding-left: 0.32rem;
+    font-size: 0.28rem;
+    font-weight: bold;
+    color: #333333;
+    position: relative;
+    margin-bottom: 0.28rem;
+    margin-top: 0.2rem;
+}
+.reward_ti:before{
+    content: '';
+    width: 0.04rem;
+    height: 0.32rem;
+    background-color: #6c25c8;
+    border-radius: 0.01rem;
+    position: absolute;
+    top: 50%;
+    left: 0.2rem;
+    transform: translateY(-50%);
+}
+.reward_list{
+    padding: 0.2rem;
+    background: #fff;
+    border-radius: 0.18rem;
+    position: relative;
+    margin-bottom: 0.2rem;
+}
+.platform_name{
+    font-size: 0.26rem;
+    line-height: 0.46rem;
+    color: #333333;
+}
+.platform_time{
+    font-size: 0.24rem;
+    line-height: 0.46rem;
+    color: #888888;
+}
+.platform_num{
+    font-size: 0.26rem;
+    color: #ff3c3c;
+    position: absolute;
+    top: 50%;
+    right: 0.2rem;
+    transform: translateY(-50%);
+}
+.time_box{
+    height: 0.7rem;
+    background: #fff;
+    border-bottom: 0.02rem solid #f1f1f1;
+    padding: 0 0.2rem;
+    line-height: 0.7rem;
+}
+.time_ti{
+    font-size: 0.28rem;
+    color: #333333;
+    float: left;
+}
+.choose_time{
+    width: 6.2rem;
+    height: 0.38rem;
+    float: right;
+    position: relative;
+    margin-top: 0.16rem;
+    background: #f1f1f1;
+}
+.choose_time input{
+    width: 40%;
+    float: left;
+    height: 0.38rem;
+    border: none;
+    background: rgba(0, 0, 0, 0);
+    font-size: 0.24rem;
+    line-height: 0.38rem;
+    margin: 0;
+    padding: 0 0 0 0.2rem;
+}
+.choose_time img{
+    width: 0.26rem;
+    position: absolute;
+    top: 50%;
+    right: 0.06rem;
+    transform: translateY(-50%);
+}
+.my_order{
+    padding: 0.2rem 0.5rem;
+    font-size: 0.28rem;
+    font-weight: bold;
+    color: #333333;
+    position: relative;
+}
+.my_order:before{
+    content: '';
+    width: 0.04rem;
+    height: 0.32rem;
+    background-color: #6c25c8;
+    border-radius: 0.01rem;
+    position: absolute;
+    top: 50%;
+    left: 0.4rem;
+    transform: translateY(-50%);
+}
+.order_box{
+    padding: 0 0.2rem;
+}
+.order_list{
+    background-color: #ffffff;
+    border-radius: 0.18rem;
+    padding: 0.06rem 0.2rem;
+    position: relative;
+    margin-bottom: 0.2rem;
+}
+.order_list p{
+    font-size: 0.26rem;
+    color: #333333;
+    line-height: 0.44rem;
+}
+.order_list p span{
+    color: #6c25c8;
+}
+.order_list p.order_time{
+    font-size: 0.24rem;
+    color: #888888;
+}
+.score_box{
+    position: absolute;
+    top: 0;
+    right: 0.4rem;
+}
+.score_num{
+    width: 0.65rem;
+    height: 0.94rem;
+    background: url("../img/score_bg.png");
+    background-size: 100%;
+    font-size: 0.24rem;
+    color: #fff;
+    text-align: center;
+    float: right;
+}
+.score_num span{
+    font-size: 0.28rem;
+}
+.score_box a{
+    font-size: 0.26rem;
+    color: #5847f8;
+    text-align: right;
+    margin-top: 0.36rem;
+    display: block;
+}
+.score_box a img{
+    width: 0.24rem;
+    vertical-align: -0.04rem;
+    margin-right: 0.1rem;
+}

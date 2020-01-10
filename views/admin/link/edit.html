@@ -1,0 +1,70 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('backend/Link/index')}">提现管理</a></li>
+            <li class="layui-this">编辑版本</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" id="myForm" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">定义查询价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price" value="{$list.price}" required lay-verify="required" placeholder="请输入定义查询价格" class="layui-input">
+                        </div>
+                    </div>
+
+                    {if condition="$list.product_type eq 2"}
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">热门问题价格</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price1" value="{$list.price1}" required lay-verify="required" placeholder="请输入热门问题价格" class="layui-input">
+                        </div>
+                    </div>
+                    {/if}
+
+                    <input type="hidden" name="type" value="{$list.product_type}">
+                    <input type="hidden" name="id" value="{$list.id}">
+                </form>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" id="edit">更新</button>
+                        <button onclick="reset()" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/public/bootstrap/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+    //编辑
+    $("#edit").on('click',function () {
+        var load=layer.load(1);
+        var url="{:url('backend/Link/edit')}";
+        var send=$("#myForm").serialize();
+        $.post(url,send,function (row) {
+            layer.close(load);
+            if(row.status=="success"){
+                layer.msg(row.msg,{icon:1},function () {
+                    location.replace("{:url('backend/Link/index')}");
+                })
+            }else{
+                layer.msg(row.msg,{icon:2},function () {
+                    reset();
+                })
+            }
+        })
+    });
+
+    //重置
+    function reset() {
+        $("#myForm")[0].reset();
+    }
+</script>
+{/block}

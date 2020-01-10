@@ -1,0 +1,87 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:37:"./views/index/customers/withdraw.html";i:1578453281;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>提现</title>
+    <link rel="stylesheet" href="/public/index/css/mui.min.css">
+    <link rel="stylesheet" href="/public/index/css/iconfont.css">
+    <link rel="stylesheet" href="/public/index/css/style.css">
+    <link rel="stylesheet" href="/public/index/css/withdraw.css">
+    <script src="/public/index/js/mui.min.js"></script>
+    <script src="/public/index/js/jquery.min.js"></script>
+    <script src="/public/layer/layer.js"></script>
+    <style>
+        .record{display: inline-block;float: right;width: 25%;color:#0e7fff;text-align: center }
+        .enter{text-align: center;line-height: 50px;width: 40%;margin: 50px auto;color: white;background: #0e7fff;
+            border-radius: 10px;font-size: 18px}
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="withdrawal_top">
+        <div class="money_box">
+            <span>￥</span>
+            <input type="text" name="money" value="0">
+        </div>
+        <p class="withdrawal_ti">
+            可提现余额:<?php echo $res['money']; ?>
+            <a href="<?php echo url('index/Customers/record'); ?>"><span class="record">提现记录</span></a>
+        </p>
+    </div>
+    <div class="withdrawal_way">
+        <p>
+            <span class="choose active" type="1"></span>支付宝
+        </p>
+        <p>
+            <span class="choose" type="2"></span>银行卡
+        </p>
+    </div>
+    <p class="change_way">
+        <a href="<?php echo url('index/Customers/blindpay'); ?>">
+            <img src="/public/index/img/user/icon_alipy.png">添加支付宝
+        </a>
+        <a href="<?php echo url('index/Customers/blindbank'); ?>">
+            <img class="yinl" src="/public/index/img/user/icon_yin.png" alt="">添加银行卡
+        </a>
+    </p>
+    <div class="explain">
+        <p>提现说明：</p>
+        <p>1.单笔最少xx钱</p>
+        <p>2.工作日内半小时到账（9:00-19：00）</p>
+        <p>3.非工作日48小时之内到账</p>
+    </div>
+    <p class="enter" data-sign="<?php echo $res['sign']; ?>">立即提现</p>
+</div>
+</body>
+<script>
+    $(function(){
+        $(".choose").click(function(){
+            $(this).addClass("active").parent().siblings().find(".choose").removeClass("active")
+        });
+        $(".enter").on('click',function () {
+            var sign=$(this).data('sign');
+            var money=$("input[name='money']").val();
+            var type=$(".withdrawal_way p .active").attr("type");
+            var send={"sign":sign,"money":money,"type":type};
+            var url="<?php echo url('index/Customers/withdraw'); ?>";
+            var load=layer.load(1);
+            $.post(url,send,function (row) {
+                layer.close(load);
+                if(row.status=="success"){
+                    layer.msg("申请提现成功",{icon:1},function () {
+                        location.reload();
+                    })
+                }else{
+                    layer.msg(row.msg,{icon:2},function () {
+                        location.reload();
+                    })
+                }
+            });
+        })
+    })
+</script>
+</html>

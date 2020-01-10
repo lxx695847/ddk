@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>钱包</title>
+    <link rel="stylesheet" href="__ICSS__/mui.min.css">
+    <link rel="stylesheet" href="__ICSS__/iconfont.css">
+    <link rel="stylesheet" href="__ICSS__/style.css">
+    <link rel="stylesheet" href="__ICSS__/reward.css">
+    <script src="__IJS__/mui.min.js"></script>
+    <script src="__IJS__/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="reward_box">
+        <div class="reward_all">
+            总奖励金额：￥{$res.total}
+            <a href="{:url('index/Customer/withdraw')}">
+                <img src="__IIMG__/user/icon_wallet.png" alt="">
+                立即提现
+            </a>
+        </div>
+        <p class="reward_ti">奖励明细</p>
+        {if condition="$res.list neq false"}
+            {foreach $res.list as $v}
+            <div class="reward_list">
+                <p class="platform_name">奖励说明：{$v.type}</p>
+                <p class="platform_time">奖励时间：{$v.create_time|date="Y-m-d",###}</p>
+                <p class="platform_num">+{$v.money}元</p>
+            </div>
+            {/foreach}
+        {else/}
+        <p style="text-align: center;line-height: 80px;">暂无奖励</p>
+        {/if}
+    </div>
+</div>
+</body>
+</html>

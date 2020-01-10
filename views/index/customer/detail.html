@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="__ICSS__/mui.min.css">
+    <link rel="stylesheet" href="__ICSS__/iconfont.css">
+    <link rel="stylesheet" href="__ICSS__/style.css">
+    <link rel="stylesheet" href="__ICSS__/user_center.css">
+    <script src="__IJS__/mui.min.js"></script>
+    <script src="__IJS__/jquery.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="info_box">
+        <div class="info_item">
+            头像
+            {if condition="$res.gender eq 1"}
+                <img src="__IIMG__/user/userhead_nan.png">
+            {else/}
+                <img src="__IIMG__/user/userhead_nv.png">
+            {/if}
+        </div>
+        <div class="info_item">
+            昵称
+            <span id="changeName">{$res.names}</span>
+            <i class="mui-icon mui-icon-arrowright"></i>
+        </div>
+        <div class="info_item">
+            手机号
+            <span class="info_tel">{$res.mobile}</span>
+        </div>
+        <div class="info_item">
+            性别
+            <span id="changeSex">{if condition="$res.gender eq 1"}男{else/}女{/if}</span>
+            <i class="mui-icon mui-icon-arrowright"></i>
+        </div>
+    </div>
+
+    <div class="popup_box">
+        <!-- 修改昵称 -->
+        <div class="change_name" id="nickname">
+            <input type="text" name="names" placeholder="请输入昵称">
+            <div class="btn_box">
+                <button class="cancel_name">取消</button>
+                <button class="sure_name">确定</button>
+            </div>
+        </div>
+
+        <!-- 修改性别 -->
+        <div class="change_name" id="gender">
+            <div class="mui-input-row mui-radio">
+                <label>男</label>
+                <input name="gender" type="radio" value="1">
+            </div>
+            <div class="mui-input-row mui-radio">
+                <label>女</label>
+                <input name="gender" type="radio" value="2">
+            </div>
+            <div class="clearfix"></div>
+            <div class="btn_box">
+                <button class="cancel_sex">取消</button>
+                <button class="sure_sex">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function(){
+        $("#changeName").click(function(){
+            $(".popup_box").show();
+            $("#nickname").show();
+            var name1 = $("#changeName").text();
+            $("#nickname input").val(name1);
+
+            //确认
+            $(".sure_name").click(function(){
+                if($("#nickname input").val()!=false){
+                    var load=layer.load(1);
+                    var names = $("#nickname input").val();
+                    var url1="{:url('index/Customer/detail')}";
+                    var send={"names":names};
+                    $.post(url1,send,function (row) {
+                        layer.close(load);
+                        $(".popup_box").hide();
+                        $("#nickname").hide();
+                        if(row.status=="success"){
+                            layer.msg(row.msg,{icon:1},function () {
+                                location.reload();
+                            })
+                        }else{
+                            layer.msg(row.msg,{icon:2},function () {
+                                location.reload();
+                            })
+                        }
+                    });
+                }else{
+                    layer.msg("昵称必须");
+                }
+            });
+
+            //取消
+            $(".cancel_name").click(function(){
+                $(".popup_box").hide();
+                $("#nickname").hide();
+            });
+        });
+
+
+        $("#changeSex").click(function(){
+            $(".popup_box").show();
+            $("#gender").show();
+            if($("#changeSex").text() == "男"){
+                $("#gender .mui-radio").eq(0).find("input").attr("checked","checked");
+            }else{
+                $("#gender .mui-radio").eq(1).find("input").attr("checked","checked");
+            }
+
+            //取消
+            $(".cancel_sex").click(function(){
+                $(".popup_box").hide();
+                $("#gender").hide();
+            });
+
+            //确认
+            $(".sure_sex").click(function(){
+                var gender = $('input:radio[name="gender"]:checked').val();
+                var load=layer.load(1);
+                var url1="{:url('index/Customer/detail')}";
+                var send={"gender":gender};
+                $.post(url1,send,function (row) {
+                    layer.close(load);
+                    $(".popup_box").hide();
+                    $("#gender").hide();
+                    if(row.status=="success"){
+                        layer.msg(row.msg,{icon:1},function () {
+                            location.reload();
+                        })
+                    }else{
+                        layer.msg(row.msg,{icon:2},function () {
+                            location.reload();
+                        })
+                    }
+                });
+            });
+        });
+    })
+</script>
+</html>

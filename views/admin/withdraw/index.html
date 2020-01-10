@@ -1,0 +1,189 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-body">
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">提现管理</li>
+            <li class=""><a href="{:url('backend/withdraw/add')}">添加提现</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form layui-form-pane" id="myform" method="get">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">关键词</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="keyword" name="keyword" value="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开始时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input start_time" name="start" id="start" value="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">结束时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input end_time" name="end" id="end" value="">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="layui-inline">
+                    <button onclick="getSearch()" class="layui-btn">搜索</button>
+                </div>
+                <div class="layui-inline">
+                    <button onclick="excel()" class="layui-btn">导出EXCEL</button>
+                </div>
+                <div class="layui-inline">
+                    <button onclick="reset()" class="layui-btn">重置</button>
+                </div>
+
+                <hr>
+                {if condition="$list.res neq false"}
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 30px;">ID</th>
+                        <th>客户名</th>
+                        <th>提现金额</th>
+                        <th>账户余额</th>
+                        <th>类型</th>
+                        <th>提现名</th>
+                        <th>联系方式</th>
+                        <th>账号</th>
+                        <th>状态</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $list.res as $vo}
+                    {if condition="$vo.money gt $vo.balance"}
+                    <tr style="background: rgba(255,0,0,0.1);">
+                        <td>{$vo.id}</td>
+                        <td>{$vo.names}</td>
+                        <td>{$vo.money}</td>
+                        <td>{$vo.balance}</td>
+                        <td>{if condition="$vo.type eq 1"}支付宝{else/}银行卡{/if}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.mobile}</td>
+                        <td>{$vo.bankcard}</td>
+                        <td>待处理</td>
+                        <td>{$vo.create_time|date="Y-m-d",###}</td>
+                        <td>
+                            <a href="{:url('backend/Withdraw/get_edit')}?sign={$vo.sign}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                            <a data-sign="{$vo.sign}" class="getDel layui-btn layui-btn-danger layui-btn-mini">删除</a>
+                        </td>
+                    </tr>
+                    {else/}
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.names}</td>
+                        <td>{$vo.money}</td>
+                        <td>{$vo.balance}</td>
+                        <td>{if condition="$vo.type eq 1"}支付宝{else/}银行卡{/if}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.mobile}</td>
+                        <td>{$vo.bankcard}</td>
+                        <td>{if condition="$vo.status eq 1"}
+                            已支付
+                            {else/}
+                            <a data-sign="{$vo.sign}" class="getPay layui-btn layui-btn-danger layui-btn-mini">支付</a>
+                            {/if}
+                        </td>
+                        <td>{$vo.create_time|date="Y-m-d",###}</td>
+                        <td>
+                            <a href="{:url('backend/Withdraw/get_edit')}?sign={$vo.sign}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                            <a data-sign="{$vo.sign}" class="getDel layui-btn layui-btn-danger layui-btn-mini">删除</a>
+                        </td>
+                    </tr>
+                    {/if}
+
+                    {/foreach}
+                    </tbody>
+                </table>
+                <!--分页-->
+                {$list.page}
+                {else/}
+                <p style="text-align: center;line-height: 80px;font-size: 18px;">暂无记录</p>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $(function(){
+        //支付
+        $(".getPay").on('click',function () {
+            var load=layer.load(1);
+            var send="{:url('backend/Withdraw/get_pay')}";
+            var sign=$(this).data('sign');
+            $.post(send,{'sign':sign},function (row) {
+                layer.close(load);
+                if(row.status=="success"){
+                    layer.msg(row.msg,{icon:1},function () {
+                        location.reload();
+                    })
+                }else{
+                    layer.msg(row.msg,{icon:2},function () {
+                        location.reload();
+                    })
+                }
+            })
+        });
+
+        //删除
+        $(".getDel").on('click',function () {
+            layer.confirm("确定要删除该提现记录?",{btn:['确认','取消']},function () {
+                var load1=layer.load(1);
+                var send1="{:url('backend/Withdraw/get_del')}";
+                var sign=$(this).data('sign');
+                $.post(send1,{'sign':sign},function (row) {
+                    layer.close(load1);
+                    if(row.status=="success"){
+                        layer.msg("删除成功",{icon:1},function () {
+                            location.reload();
+                        })
+                    }else{
+                        layer.msg("删除失败",{icon:2},function () {
+                            location.reload();
+                        })
+                    }
+                })
+            })
+        })
+    });
+
+    function excel(){
+        var keyword=$("#keyword").val();
+        var start=$("#start").val();
+        var end=$("#end").val();
+        layer.msg("导出数据中...",function () {
+            location.replace("{:url('backend/Withdraw/excel')}?keyword="+keyword+"&start="+start+"&end="+end);
+        });
+    }
+
+    function getSearch() {
+        layer.msg("搜索中....");
+        var keyword=$("#keyword").val();
+        var start=$("#start").val();
+        var end=$("#end").val();
+        if(keyword==false && start==false && end==false){
+            layer.closeAll();
+            layer.msg("请至少选择一个搜索条件");
+        }else{
+            layer.closeAll();
+            location.replace("{:url('backend/Withdraw/index')}?keyword="+keyword+"&start="+start+"&end="+end);
+        }
+    }
+
+    function reset() {
+        $("#myform")[0].reset();
+        location.replace("{:url('backend/Withdraw/index')}")
+    }
+</script>
+{/block}

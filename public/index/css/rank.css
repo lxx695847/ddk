@@ -1,0 +1,70 @@
+@charset "UTF-8";
+body{font-family: PingFang-SC-Regular;background: #fff;}
+.container{
+    min-width: 320px;
+    max-width: 750px;
+    margin: 0 auto;
+    position: relative;
+}
+.banner_pic{
+    width: 100%;
+    display: block;
+}
+.tab_top{
+    background: #F1F1F1;
+    padding: 0.3rem 0.4rem;
+    display: flex;
+    justify-content: space-between;
+}
+.tab_top span{
+    display: inline-block;
+    width: 2.04rem;
+    height: 0.8rem;
+    background-color: #bcbce1;
+    border-radius: 0.06rem;
+    font-size: 0.28rem;
+    color: #ffffff;
+    line-height: 0.8rem;
+    text-align: center;
+}
+.tab_top span.active{
+    background-color: #7e7fd7;
+}
+.ranking_box{
+    padding: 0.2rem 0.4rem;
+}
+.ranking_item{
+    display: none;
+}
+.ranking_item.active{
+    display: block;
+}
+.ranking_item ul li{
+    height: 0.68rem;
+    line-height: 0.68rem;
+}
+.platform_name{
+    width: 40%;
+    float: left;
+    font-size: 0.28rem;
+	color: #333333;
+}
+.platform_name span{
+    display: inline-block;
+    width: 0.3rem;
+    text-align: center;
+    font-size: 0.26rem;
+    color: #333333;
+    margin-right: 0.1rem;
+}
+.platform_name span img{
+    width: 0.3rem;
+    vertical-align: middle;
+}
+.platform_score,.platform_praise{
+    width: 30%;
+    float: left;
+    text-align: center;
+    font-size: 0.28rem;
+	color: #333333;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>下级代理</title>
+    <link rel="stylesheet" href="__ICSS__/mui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/iconfont.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+    <link rel="stylesheet" href="__ICSS__/subordinate.css">
+    <script src="__PUBLIC__/js/mui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+</head>
+<style>
+    .data_box table tr th:nth-child(1) {
+        text-align: left;
+    }
+    .data_box table tr:first-of-type th {
+        font-size: 0.3rem;
+    }
+
+    .data_box table tr th:nth-child(2) {
+        text-align: center;
+    }
+
+    .data_box table tr th:nth-child(3) {
+        text-align: right;
+    }
+    .data_box table tr th {
+        line-height: 0.64rem;
+        font-size: 0.26rem;
+        color: #333;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="xia_top clearfix">
+        <p class="top_left">下级代理人数：<span>{$count}人</span></p>
+    </div>
+
+        <div class="data_box active">
+            <table>
+                <thead>
+                <tr>
+                    <th>手机号</th>
+                    <th>注册时间</th>
+                    <th>贡献收益</th>
+                </tr>
+                </thead>
+
+                <div id="refreshContainer" class="mui-scroll-wrapper reply" style="margin-top:14px;border-radius:4px;height:525px;">
+                    <div class="mui-scroll">
+                        <tbody class="lai">
+
+                        </tbody>
+                        <!--数据列表-->
+                    </div>
+                </div>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/js/jquery.min.js"></script>
+<script src="__IJS__/mui.min.js"></script>
+<script src="__PUBLIC__/layui/layui.all.js"></script>
+<script>
+    page = 0;
+    limit = 30;
+    pullupRefresh();
+
+    mui.init({
+        pullRefresh: {
+            container: "#refreshContainer",//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+            up: {
+                contentrefresh: "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+                contentnomore: ' ',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                callback: pullupRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+            }
+        }
+    });
+    function pullupRefresh() {
+        setTimeout(function () {
+            page++;
+            data();
+        },500);
+    }
+
+
+    function data(){
+        $.ajax({
+            url: '{:url("/index/subordinate/query")}',
+            type: 'post',
+            data: {"page": page, "limit": limit},
+            dataType: 'json',
+            success: function (json) {
+                if (json.length < limit) {
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                }
+                $.each(json, function (index, obj) {
+                    var html = '<tr>\n' +
+                        '             <td>'+ obj.mobile +'</td>\n' +
+                        '              <td>'+ obj.createdAt +'</td>\n' +
+                        '              <td>'+ obj.total_achievement +'</td>\n' +
+                        '       </tr>\n';
+                    $('.lai').append(html);
+                });
+            }
+        })
+    }
+</script>
+<script>
+    $(function(){
+        $(".top_right span").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+            var index = $(this).index();
+            $(".data_box").eq(index).addClass("active").siblings().removeClass("active");
+        })
+    })
+</script>
+
+</html>

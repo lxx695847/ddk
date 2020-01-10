@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>支付宝绑定</title>
+    <link rel="stylesheet" href="__ICSS__/mui.min.css">
+    <link rel="stylesheet" href="__ICSS__/iconfont.css">
+    <link rel="stylesheet" href="__ICSS__/style.css">
+    <link rel="stylesheet" href="__ICSS__/bindBank.css">
+    <script src="__IJS__/mui.min.js"></script>
+    <script src="__IJS__/jquery.min.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+</head>
+<body>
+<div class="container">
+    <img class="top_img" src="__IIMG__/user/alipay_top.png">
+    <div class="main">
+        <div class="bind_box">
+            <form method="post" id="myForm">
+                <input type="text" name="bankname" placeholder="请输入支付宝账号">
+                <input type="text" name="wname" placeholder="请输入真实姓名">
+                <input type="text" name="phone" placeholder="请输入手机号">
+                <input type="hidden" name="banktype" value="1">
+            </form>
+            <div class="clearfix"></div>
+            <p class="bind_tips">*请确认信息无误</p>
+            <button class="submit_btn submit_btn1">确定完成</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".submit_btn").on('click',function () {
+            var send=$("#myForm").serialize();
+            var url="{:url('index/Customer/blindpay')}";
+            var load=layer.load(1);
+            $.post(url,send,function (row) {
+                layer.close(load);
+                if(row.status=="success"){
+                    layer.msg(row.msg,{icon:1},function () {
+                        location.reload();
+                    })
+                }else{
+                    layer.msg(row.msg,{icon:2},function () {
+                        location.reload();
+                    })
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

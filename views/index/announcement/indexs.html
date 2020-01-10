@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>平台公告</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
+    <link rel="stylesheet" href="__ICSS__/iconfont.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/mui.picker.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__ICSS__/notice.css">
+    <script src="__PUBLIC__/js/mui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/index/js/clipboard.min.js"></script>
+    <script src="__PUBLIC__/layui/layui.all.js"></script>
+</head>
+<body>
+	<style>
+		.copy_cont{
+			    width: 1.2rem;
+    			height: 0.36rem;
+    			display: block;
+    			background-color: #ffeedb;
+    			border-radius: 0.185rem;
+    			border: none;
+    			font-size: 0.24rem;
+    			color: #df8826;
+    			text-align: center;
+    			line-height: 0.36rem;
+    			margin-top: 0.16rem;
+		}
+	</style>
+<div class="container">
+    {foreach name="data" item="vo" key="k"}
+    <div class="info_list">
+    	<a href="{:url('/index/note/index',['id'=>$vo.id])}">
+        <p class="info_ti">{if condition="!empty($vo.tid) && $vo.tid == 4"}公告文案{else/}产品素材{/if}</p>
+        <p class="info_time">{$vo.lasttime}</p>
+        
+        <p class="info_des">{$vo.title}</p>
+        </a>
+        <p class="info_des">{$vo.jianjie}</p>
+        <div class="img_box clearfix">
+            {if condition = "isset($vo.thumb) && !empty($vo.thumb)"}
+            <img src="{$vo.thumb}" alt="">
+            {/if}
+        </div>
+        <input name="url" style="text-align: center;font-size: 0.1px;z-index: -999;position: absolute;left: 2%;border-radius: 0.185rem; width: 1.3rem; height: 0.1rem;" value="<?php echo $_SERVER['HTTP_HOST']; ?>/index/note/index/id/{$vo.id}" id="foo{$vo.id}"  style="width:300px;"  type="text">
+        <span class="copy_cont copys webcopy" style="text-align: center;" data-clipboard-action="copy" data-clipboard-target="#foo{$vo.id}" id="webcopy">复制链接</span>
+    </div>
+    {/foreach}
+    {include file="layout/main" /}
+</div>
+</body>
+<script>
+    $(function(){
+        $(".tab_item").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+
+        $(".webcopy").on('click',function(){
+            var clipboard = new Clipboard('.copys');
+            layer.msg('链接复制成功',{time:500},function(){
+                $(".cover_box1").hide();
+            });
+
+        });
+    })
+</script>
+</html>

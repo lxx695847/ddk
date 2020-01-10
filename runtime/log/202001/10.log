@@ -1,0 +1,12 @@
+---------------------------------------------------------------
+[ 2020-01-10T07:48:01+08:00 ] 223.104.20.25 GET www.xinqianjincx.com/index/index?from=singlemessage&isappinstalled=0
+[运行时间：0.046019s] [吞吐率：21.73req/s] [内存消耗：3,407.20kb] [文件加载：53]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009024s ] mysql:host=127.0.0.1;dbname=testddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_gonggao` [ RunTime:0.012598s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_gonggao` WHERE  `type` IN (0,3) ORDER BY `id` DESC [ RunTime:0.000361s ]
+---------------------------------------------------------------
+[ 2020-01-10T07:48:05+08:00 ] 223.104.20.25 GET www.xinqianjincx.com/index/index/index.html?from=singlemessage&isappinstalled=0
+[运行时间：0.025468s] [吞吐率：39.27req/s] [内存消耗：3,407.26kb] [文件加载：53]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000384s ] mysql:host=127.0.0.1;dbname=testddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_gonggao` [ RunTime:0.000645s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_gonggao` WHERE  `type` IN (0,3) ORDER BY `id` DESC [ RunTime:0.000232s ]
