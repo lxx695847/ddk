@@ -10,3 +10,156 @@
 [ sql ] [ DB ] CONNECT:[ UseTime:0.000384s ] mysql:host=127.0.0.1;dbname=testddk;charset=utf8
 [ sql ] [ SQL ] SHOW COLUMNS FROM `sun_gonggao` [ RunTime:0.000645s ]
 [ sql ] [ SQL ] SELECT * FROM `sun_gonggao` WHERE  `type` IN (0,3) ORDER BY `id` DESC [ RunTime:0.000232s ]
+---------------------------------------------------------------
+[ 2020-01-10T11:58:53+08:00 ] 127.0.0.1 POST t.com/backend/login/login.html
+[运行时间：0.122923s] [吞吐率：8.14req/s] [内存消耗：2,614.10kb] [文件加载：59]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007354s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_admin_user` [ RunTime:0.027673s ]
+[ sql ] [ SQL ] SELECT `id`,`username`,`names`,`status` FROM `sun_admin_user` WHERE  `username` = 'admin'  AND `password` = '396c2027c73dcc70fe2184ed6b17f56c' LIMIT 1 [ RunTime:0.003713s ]
+[ sql ] [ SQL ] UPDATE `sun_admin_user`  SET `recording`=`recording`+1,`last_login_time`='2020-01-10 11:58:53',`last_login_ip`='127.0.0.1'  WHERE  `id` = 1 [ RunTime:0.014581s ]
+---------------------------------------------------------------
+[ 2020-01-10T11:58:53+08:00 ] 127.0.0.1 GET t.com/backend/index/index
+[运行时间：0.120987s] [吞吐率：8.27req/s] [内存消耗：2,880.00kb] [文件加载：61]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011274s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.019178s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.001892s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.014646s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.002371s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.001614s ]
+[ sql ] [ SQL ] SELECT VERSION() AS ver [ RunTime:0.002922s ]
+---------------------------------------------------------------
+[ 2020-01-10T11:58:56+08:00 ] 127.0.0.1 GET t.com/backend/agent/index.html
+[运行时间：0.191865s] [吞吐率：5.21req/s] [内存消耗：3,446.05kb] [文件加载：68]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.014194s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.014365s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.000922s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.018605s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.000967s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.000931s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_agent` [ RunTime:0.019285s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_agent` `a` WHERE  `a`.`agent_name` LIKE '%%' LIMIT 1 [ RunTime:0.001075s ]
+[ sql ] [ SQL ] SELECT `a`.* FROM `sun_agent` `a` WHERE  `a`.`agent_name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.000543s ]
+---------------------------------------------------------------
+[ 2020-01-10T11:58:57+08:00 ] 127.0.0.1 GET t.com/backend/product/index.html
+[运行时间：0.178756s] [吞吐率：5.59req/s] [内存消耗：3,358.94kb] [文件加载：68]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012489s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.019285s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.000577s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.016284s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.001275s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.001032s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_product` [ RunTime:0.018958s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_product` `p` WHERE  `p`.`name` LIKE '%%' LIMIT 1 [ RunTime:0.000629s ]
+[ sql ] [ SQL ] SELECT `p`.* FROM `sun_product` `p` WHERE  `p`.`name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.000585s ]
+---------------------------------------------------------------
+[ 2020-01-10T11:59:45+08:00 ] 127.0.0.1 GET t.com/backend/authagent/index.html
+[运行时间：2.392757s] [吞吐率：0.42req/s] [内存消耗：3,372.73kb] [文件加载：68]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.117551s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.546636s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.000583s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.037217s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.005971s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.004419s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_agent` [ RunTime:0.035527s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_auth_agent` `a` LEFT JOIN `sun_agent` `b` ON `a`.`aid`=`b`.`id` LEFT JOIN `sun_product` `p` ON `a`.`pid`=`p`.`id` WHERE  `b`.`agent_name` LIKE '%%' LIMIT 1 [ RunTime:0.002751s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`agent_name`,`p`.`name` FROM `sun_auth_agent` `a` LEFT JOIN `sun_agent` `b` ON `a`.`aid`=`b`.`id` LEFT JOIN `sun_product` `p` ON `a`.`pid`=`p`.`id` WHERE  `b`.`agent_name` LIKE '%%' ORDER BY `a`.`id` DESC LIMIT 0,15 [ RunTime:0.000537s ]
+---------------------------------------------------------------
+[ 2020-01-10T11:59:46+08:00 ] 127.0.0.1 GET t.com/backend/product/index.html
+[运行时间：0.215995s] [吞吐率：4.63req/s] [内存消耗：3,198.35kb] [文件加载：66]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003870s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.018107s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.001669s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.021382s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.002200s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.001488s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_product` [ RunTime:0.014260s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_product` `p` WHERE  `p`.`name` LIKE '%%' LIMIT 1 [ RunTime:0.000905s ]
+[ sql ] [ SQL ] SELECT `p`.* FROM `sun_product` `p` WHERE  `p`.`name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.002645s ]
+---------------------------------------------------------------
+[ 2020-01-10T11:59:47+08:00 ] 127.0.0.1 GET t.com/backend/useragent/index.html
+[运行时间：0.179976s] [吞吐率：5.56req/s] [内存消耗：3,483.84kb] [文件加载：68]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002790s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.016878s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.000537s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.020514s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.002214s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.003248s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_user` [ RunTime:0.025777s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_user` `a` LEFT JOIN `sun_agent` `b` ON `a`.`agent_class`=`b`.`id` LEFT JOIN `sun_user` `c` ON `a`.`pid`=`c`.`id` WHERE  `a`.`agent_class` > 1 LIMIT 1 [ RunTime:0.001714s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`agent_name`,c.names pnames FROM `sun_user` `a` LEFT JOIN `sun_agent` `b` ON `a`.`agent_class`=`b`.`id` LEFT JOIN `sun_user` `c` ON `a`.`pid`=`c`.`id` WHERE  `a`.`agent_class` > 1 ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.000946s ]
+[ sql ] [ SQL ] SELECT COUNT(a.id) AS tp_count FROM `sun_user` `a` WHERE  `a`.`agent_class` > 1 LIMIT 1 [ RunTime:0.000578s ]
+[ sql ] [ SQL ] SELECT COUNT(a.id) AS tp_count FROM `sun_user` `a` WHERE  `a`.`agent_class` > 1  AND ( `a`.`create_time` >= 1578585600 AND `a`.`create_time` <= 1578628787 )  AND `a`.`total_achievement` > '0' LIMIT 1 [ RunTime:0.000595s ]
+[ sql ] [ SQL ] SELECT COUNT(a.id) AS tp_count FROM `sun_user` `a` WHERE  `a`.`agent_class` > 1  AND ( `a`.`create_time` >= 1578585600 AND `a`.`create_time` <= 1578628787 ) LIMIT 1 [ RunTime:0.000497s ]
+[ sql ] [ SQL ] SELECT COUNT(a.id) AS tp_count FROM `sun_user` `a` WHERE  `a`.`agent_class` > 1  AND `a`.`total_achievement` > '0' LIMIT 1 [ RunTime:0.000441s ]
+---------------------------------------------------------------
+[ 2020-01-10T12:54:00+08:00 ] 127.0.0.1 GET t.com/backend/authagent/index.html
+[运行时间：0.366883s] [吞吐率：2.73req/s] [内存消耗：3,210.89kb] [文件加载：66]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.027599s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.036778s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.008324s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.021602s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.006151s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.002334s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_agent` [ RunTime:0.019028s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_auth_agent` `a` LEFT JOIN `sun_agent` `b` ON `a`.`aid`=`b`.`id` LEFT JOIN `sun_product` `p` ON `a`.`pid`=`p`.`id` WHERE  `b`.`agent_name` LIKE '%%' LIMIT 1 [ RunTime:0.009916s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`agent_name`,`p`.`name` FROM `sun_auth_agent` `a` LEFT JOIN `sun_agent` `b` ON `a`.`aid`=`b`.`id` LEFT JOIN `sun_product` `p` ON `a`.`pid`=`p`.`id` WHERE  `b`.`agent_name` LIKE '%%' ORDER BY `a`.`id` DESC LIMIT 0,15 [ RunTime:0.002987s ]
+---------------------------------------------------------------
+[ 2020-01-10T12:54:01+08:00 ] 127.0.0.1 GET t.com/backend/product/index.html
+[运行时间：0.207159s] [吞吐率：4.83req/s] [内存消耗：3,198.41kb] [文件加载：66]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.006264s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.021595s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.001109s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.020549s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.004586s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.002731s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_product` [ RunTime:0.016084s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_product` `p` WHERE  `p`.`name` LIKE '%%' LIMIT 1 [ RunTime:0.000652s ]
+[ sql ] [ SQL ] SELECT `p`.* FROM `sun_product` `p` WHERE  `p`.`name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.003356s ]
+---------------------------------------------------------------
+[ 2020-01-10T12:54:02+08:00 ] 127.0.0.1 GET t.com/backend/agent/index.html
+[运行时间：0.178489s] [吞吐率：5.60req/s] [内存消耗：3,273.17kb] [文件加载：66]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012797s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.017932s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.000555s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.015700s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.001318s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.001394s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_agent` [ RunTime:0.016389s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_agent` `a` WHERE  `a`.`agent_name` LIKE '%%' LIMIT 1 [ RunTime:0.000823s ]
+[ sql ] [ SQL ] SELECT `a`.* FROM `sun_agent` `a` WHERE  `a`.`agent_name` LIKE '%%' ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.003163s ]
+---------------------------------------------------------------
+[ 2020-01-10T12:54:03+08:00 ] 127.0.0.1 GET t.com/backend/company/index.html
+[运行时间：0.196483s] [吞吐率：5.09req/s] [内存消耗：3,536.45kb] [文件加载：69]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012020s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.015571s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.000578s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.013848s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.004338s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.001929s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_company` [ RunTime:0.023255s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 LIMIT 1 [ RunTime:0.003862s ]
+[ sql ] [ SQL ] SELECT `c`.* FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.000657s ]
+---------------------------------------------------------------
+[ 2020-01-10T14:40:40+08:00 ] 127.0.0.1 GET t.com/backend/company/index.html
+[运行时间：0.593814s] [吞吐率：1.68req/s] [内存消耗：3,340.70kb] [文件加载：67]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.067274s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.077772s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.025960s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.036378s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.016942s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.005774s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_company` [ RunTime:0.062952s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 LIMIT 1 [ RunTime:0.003593s ]
+[ sql ] [ SQL ] SELECT `c`.* FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.002600s ]
+---------------------------------------------------------------
+[ 2020-01-10T15:12:09+08:00 ] 127.0.0.1 GET t.com/backend/company/index.html
+[运行时间：0.295761s] [吞吐率：3.38req/s] [内存消耗：3,340.70kb] [文件加载：67]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009385s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.032334s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.005492s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.017279s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.002903s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.001834s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_company` [ RunTime:0.017411s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 LIMIT 1 [ RunTime:0.003358s ]
+[ sql ] [ SQL ] SELECT `c`.* FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.002148s ]

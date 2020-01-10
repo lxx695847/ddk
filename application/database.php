@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'testddk',
+    'database'        => 'ddk',
     // 用户名
-    'username'        => 'testddk',
+    'username'        => 'root',
     // 密码
-    'password'        => 'yF6sS5wjtmR5NRL8',
+    'password'        => '123456',
     // 端口
     'hostport'        => '',
     // 连接dsn
