@@ -163,3 +163,27 @@
 [ sql ] [ SQL ] SHOW COLUMNS FROM `sun_company` [ RunTime:0.017411s ]
 [ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 LIMIT 1 [ RunTime:0.003358s ]
 [ sql ] [ SQL ] SELECT `c`.* FROM `sun_company` `c` WHERE  `c`.`isdel` = 1 ORDER BY `id` DESC LIMIT 0,15 [ RunTime:0.002148s ]
+---------------------------------------------------------------
+[ 2020-01-10T16:46:43+08:00 ] 127.0.0.1 GET t.com/backend/income/index.html
+[运行时间：0.322563s] [吞吐率：3.10req/s] [内存消耗：3,481.62kb] [文件加载：68]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012665s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.020306s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.002589s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.016242s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.004783s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.002097s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_profit` [ RunTime:0.032058s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_profit` `a` INNER JOIN `sun_user` `b` ON `a`.`uid`=`b`.`id` INNER JOIN `sun_user` `c` ON `a`.`profit_id`=`c`.`id` WHERE  `a`.`id` > 0 LIMIT 1 [ RunTime:0.004906s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`names`,c.names as cnames FROM `sun_profit` `a` INNER JOIN `sun_user` `b` ON `a`.`uid`=`b`.`id` INNER JOIN `sun_user` `c` ON `a`.`profit_id`=`c`.`id` WHERE  `a`.`id` > 0 ORDER BY `a`.`create_time` DESC LIMIT 0,10 [ RunTime:0.003699s ]
+---------------------------------------------------------------
+[ 2020-01-10T16:46:44+08:00 ] 127.0.0.1 GET t.com/backend/withdraw/index.html
+[运行时间：0.200463s] [吞吐率：4.99req/s] [内存消耗：3,500.71kb] [文件加载：68]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.005061s ] mysql:host=127.0.0.1;dbname=ddk;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_group_access` [ RunTime:0.020576s ]
+[ sql ] [ SQL ] SELECT `AuthGroupAccess`.`uid`,`AuthGroupAccess`.`group_id`,`AuthGroup`.`title`,`AuthGroup`.`rules` FROM `sun_auth_group_access` `AuthGroupAccess` LEFT JOIN `sun_auth_group` `AuthGroup` ON `AuthGroupAccess`.`group_id`=`AuthGroup`.`id` WHERE  (  AuthGroupAccess.uid='1' and AuthGroup.status='1' ) [ RunTime:0.000795s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_auth_rule` [ RunTime:0.017847s ]
+[ sql ] [ SQL ] SELECT `condition`,`name` FROM `sun_auth_rule` WHERE  `id` IN (1,75,76,77,78,79,80,91,119,120,121,122,123,92,124,125,126,127,128,129,93,107,130,131,132,133,134,135,108,136,137,138,139,140,118,14,17,44,45,46,47,48,109,110,111,112,113,114,115,116,16,6,7,8,9,10,11,18,49,50,51,52,53,19,31,32,33,34,35,36,37,73,74)  AND `type` = 1 [ RunTime:0.001877s ]
+[ sql ] [ SQL ] SELECT * FROM `sun_auth_rule` WHERE  `status` = 1 ORDER BY `sort` DESC,`id` ASC [ RunTime:0.002257s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sun_withdraw` [ RunTime:0.026129s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `sun_withdraw` `a` LEFT JOIN `sun_user` `b` ON `a`.`user_id`=`b`.`id` LEFT JOIN `sun_admin_user` `c` ON `a`.`operator`=`c`.`id` WHERE  `a`.`id` > 0 LIMIT 1 [ RunTime:0.004385s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`names`,b.money as balance,c.names as operator_name FROM `sun_withdraw` `a` LEFT JOIN `sun_user` `b` ON `a`.`user_id`=`b`.`id` LEFT JOIN `sun_admin_user` `c` ON `a`.`operator`=`c`.`id` WHERE  `a`.`id` > 0 ORDER BY `a`.`id` DESC LIMIT 0,15 [ RunTime:0.001260s ]
